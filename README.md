@@ -296,8 +296,14 @@ The custom domain is a repository setting as well, because an artifact-sourced d
 gh api -X PUT repos/pattygcoding/Rubix-Cube-Solver/pages -f cname=rubix.pattygcoding.com
 ```
 
-The subdomain itself is one DNS record - `rubix` → `pattygcoding.github.io`, the same CNAME target
-the other pattygcoding.com sites use.
+The subdomain resolves through one DNS record - `rubix` → `pattygcoding.github.io`, the same CNAME
+target the other pattygcoding.com sites use. There is no wildcard on the domain, so each new
+subdomain needs its own record; GitHub issues the certificate for it automatically once the record
+resolves. HTTPS is then enforced on the site, as it is on the other subdomains:
+
+```sh
+gh api -X PUT repos/pattygcoding/Rubix-Cube-Solver/pages -F https_enforced=true
+```
 
 ## Known limitations
 

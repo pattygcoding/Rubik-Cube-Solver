@@ -26,7 +26,7 @@ jobs:
         name: Rust solver tests
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
             # The crate carries its own unit tests (move semantics, coordinates,
             # table sizes, the two-phase search). They run on the host, so no
             # wasm32 target is needed - `cargo test --release` is what
@@ -38,12 +38,16 @@ jobs:
         needs: test
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
+            - uses: actions/checkout@v5
+            - uses: actions/setup-node@v5
               with:
                   node-version: 22
                   cache: npm
+            # `enablement` lets this job create the Pages site itself, so a fresh
+            # clone or fork does not need the one-time settings step first.
             - uses: actions/configure-pages@v5
+              with:
+                  enablement: true
             # The wasm-bindgen output is committed under src/lib/wasm-solver, so the
             # build needs Node only: no Rust toolchain and no wasm-pack in CI.
             - run: npm ci
