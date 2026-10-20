@@ -1,0 +1,36 @@
+name: Rust
+
+# This repository is the solver's Rust crate. The Svelte UI it used to ship with
+# now lives in the arcade (Arcade-PG-Website, `src/app/pages/rubix`), which loads
+# the wasm-pack output from its own `public/wasm/`; see README.md. The crate's
+# tests run on the host, so only the wasm job needs the wasm32 target and
+# wasm-pack.
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+    workflow_dispatch:
+
+jobs:
+    test:
+        name: Solver tests
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v5
+            # The two-phase search, geometry, tables, round trips and validation.
+            - run: cargo test --manifest-path wasm-solver/Cargo.toml --release
+
+    wasm:
+        name: WebAssembly build
+        needs: test
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v5
+            # Proves the release build still produces the module the arcade drops
+            # into `public/wasm/`, without committing any generated output.
+            - run: rustup target add wasm32-unknown-unknown
+            - run: cargo install wasm-pack --locked
+            - run: >
+                  wasm-pack build wasm-solver --target web --release --no-pack
+                  --out-dir pkg --out-name rubix_wasm_solver

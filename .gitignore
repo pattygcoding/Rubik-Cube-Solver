@@ -1,32 +1,16 @@
-node_modules
-
-# Output
-.output
-.vercel
-.netlify
-.wrangler
-/.svelte-kit
-/build
-
 # Rust
+/target
 /wasm-solver/target
 
-# Local dev server log
-/dev.log
+# wasm-pack output.  The bindings are copied into the arcade by hand (see
+# README.md), so nothing generated is committed here.
+/pkg
+/wasm-solver/pkg
 
-# Verification screenshots from local browser sessions
-/.playwright
+# Left over from the SvelteKit era, when this repository shipped the UI too: safe to
+# delete once nothing holds a lock on the one native module Windows keeps open.
+/node_modules
 
 # OS
 .DS_Store
 Thumbs.db
-
-# Env
-.env
-.env.*
-!.env.example
-!.env.test
-
-# Vite
-vite.config.js.timestamp-*
-vite.config.ts.timestamp-*
