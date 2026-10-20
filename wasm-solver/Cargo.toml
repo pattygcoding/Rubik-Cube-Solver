@@ -1,0 +1,32 @@
+[package]
+name = "rubix-wasm-solver"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.80"
+description = "Herbert Kociemba style two-phase Rubik's Cube solver, compiled to WebAssembly."
+license = "MIT"
+publish = false
+
+[lib]
+# `cdylib` is what `wasm-pack build` needs; `rlib` keeps `cargo test`
+# (which runs the unit tests below on the host) working smoothly.
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = ["console_error_panic_hook"]
+
+[dependencies]
+wasm-bindgen = "0.2.129"
+
+# Nicer panic messages inside the browser console.
+console_error_panic_hook = { version = "0.1.7", optional = true }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+
+# Table generation is computationally heavy, so give the dev/test profile a
+# little optimisation. This has no effect on the released `.wasm` binary.
+[profile.dev]
+opt-level = 1
