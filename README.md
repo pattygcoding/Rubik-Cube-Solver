@@ -5,7 +5,7 @@ unfolded net) and solve with a Herbert Kociemba style **two-phase search** compi
 to WebAssembly. The answer is played back move by move, with a move timeline you can scrub,
 step through forwards and backwards, and re-play at any speed.
 
-**Live: <https://rubix.pattygcoding.com/>** · source: <https://github.com/pattygcoding/Rubix-Cube-Solver>
+**Live: <https://rubik.pattygcoding.com/>** · source: <https://github.com/pattygcoding/Rubix-Cube-Solver>
 
 ```
 ┌──────────────────────┐   wasm-bindgen    ┌───────────────────────┐
@@ -273,7 +273,7 @@ deliberately not committed. Tracked files ignore `.gitignore`, so an ordinary `g
 updating them from then on.
 
 Watch the run under the repository's **Actions → Deploy to GitHub Pages**; the update goes live at
-<https://rubix.pattygcoding.com/> a minute or two later. A push that fails to test or build simply
+<https://rubik.pattygcoding.com/> a minute or two later. A push that fails to test or build simply
 leaves the previous deployment in place.
 
 `vite.config.ts` uses `@sveltejs/adapter-static` and `src/routes/+layout.ts` sets
@@ -293,10 +293,10 @@ The custom domain is a repository setting as well, because an artifact-sourced d
 `static/CNAME` is kept only as documentation:
 
 ```sh
-gh api -X PUT repos/pattygcoding/Rubix-Cube-Solver/pages -f cname=rubix.pattygcoding.com
+gh api -X PUT repos/pattygcoding/Rubix-Cube-Solver/pages -f cname=rubik.pattygcoding.com
 ```
 
-The subdomain resolves through one DNS record - `rubix` → `pattygcoding.github.io`, the same CNAME
+The subdomain resolves through one DNS record - `rubik` → `pattygcoding.github.io`, the same CNAME
 target the other pattygcoding.com sites use. There is no wildcard on the domain, so each new
 subdomain needs its own record; GitHub issues the certificate for it automatically once the record
 resolves. HTTPS is then enforced on the site, as it is on the other subdomains:
