@@ -1,6 +1,6 @@
 # Rubik's Cube Solver - the Rust/WebAssembly two-phase engine
 
-The engine behind the arcade's [Rubik's Cube Solver](https://arcade.pattygcoding.com/rubix):
+The engine behind the arcade's [Rubik's Cube Solver](https://arcade.pattygcoding.com/rubik):
 a Herbert Kociemba style two-phase search, written in Rust and compiled to
 WebAssembly with `wasm-bindgen`.
 
@@ -8,7 +8,8 @@ WebAssembly with `wasm-bindgen`.
 lives in the [arcade](https://github.com/pattygcoding/Arcade-PG-Website)
 (`src/app/pages/rubix`), ported to Angular, and it loads the WebAssembly module from
 its own `public/wasm/`. What is left here is the crate: the solver, its lookup
-tables and its tests.
+tables and its tests. The SvelteKit front end itself is archived at
+[Rubik-Cube-Solver-Legacy-Svelte](https://github.com/pattygcoding/Rubik-Cube-Solver-Legacy-Svelte).
 
 ## Quick start
 
